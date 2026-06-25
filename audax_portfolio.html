@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Audax — Estrategia Digital</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black: #0a0a0a;
+    --yellow: #F5E642;
+    --yellow-dark: #c9bc00;
+    --white: #ffffff;
+    --gray: #1a1a1a;
+    --gray-mid: #2a2a2a;
+    --text-muted: #888;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2.5rem;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(245,230,66,0.15);
+  }
+
+  .nav-logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 1.5rem;
+    letter-spacing: 0.05em;
+    color: var(--white);
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--yellow); }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--yellow); }
+
+  .nav-cta {
+    background: var(--yellow);
+    color: var(--black) !important;
+    padding: 0.5rem 1.25rem;
+    border-radius: 2px;
+    font-weight: 600 !important;
+    color: var(--black) !important;
+  }
+
+  .nav-cta:hover { background: #fff !important; color: var(--black) !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 2.5rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 22vw;
+    color: rgba(245,230,66,0.04);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-eyebrow {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(245,230,66,0.4);
+    padding: 0.35rem 0.9rem;
+    border-radius: 2px;
+    width: fit-content;
+  }
+
+  .hero h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(3.5rem, 9vw, 8rem);
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+    max-width: 900px;
+    margin-bottom: 2rem;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--yellow);
+    -webkit-text-stroke: 0px;
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 480px;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--yellow);
+    color: var(--black);
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 0.85rem 2rem;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: transform 0.15s, background 0.15s;
+  }
+
+  .btn-primary:hover { background: #fff; transform: translateY(-2px); }
+
+  .btn-ghost {
+    display: inline-block;
+    color: var(--white);
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-decoration: none;
+    padding: 0.85rem 2rem;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 2px;
+    transition: border-color 0.15s, color 0.15s;
+  }
+
+  .btn-ghost:hover { border-color: var(--yellow); color: var(--yellow); }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    flex-wrap: wrap;
+  }
+
+  .hero-stat .num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 2.5rem;
+    color: var(--yellow);
+    line-height: 1;
+  }
+
+  .hero-stat .label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 0.25rem;
+  }
+
+  /* SECTION BASICS */
+  section { padding: 5rem 2.5rem; }
+
+  .section-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    line-height: 1;
+    letter-spacing: -0.01em;
+    margin-bottom: 1rem;
+  }
+
+  .section-sub {
+    color: var(--text-muted);
+    max-width: 520px;
+    line-height: 1.7;
+    margin-bottom: 3rem;
+  }
+
+  /* SERVICIOS */
+  #servicios { background: var(--gray); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .service-card {
+    background: var(--gray);
+    padding: 2rem 1.75rem;
+    transition: background 0.2s;
+    position: relative;
+  }
+
+  .service-card:hover { background: var(--gray-mid); }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 0;
+    background: var(--yellow);
+    transition: height 0.3s;
+  }
+
+  .service-card:hover::before { height: 100%; }
+
+  .service-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--yellow);
+    margin-bottom: 1rem;
+  }
+
+  .service-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+  }
+
+  .service-desc {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+
+  /* PORTAFOLIO / CASOS */
+  #portafolio { background: var(--black); }
+
+  .portfolio-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .cases-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .case-card {
+    background: var(--gray);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+
+  .case-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(245,230,66,0.3);
+  }
+
+  .case-video {
+    position: relative;
+    padding-bottom: 56.25%;
+    background: #111;
+    overflow: hidden;
+  }
+
+  .case-video iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  .case-placeholder {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    background: linear-gradient(135deg, #111 0%, #1a1a00 100%);
+  }
+
+  .play-btn {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--yellow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.15s;
+  }
+
+  .play-btn:hover { transform: scale(1.1); }
+
+  .play-btn svg { width: 20px; height: 20px; fill: var(--black); margin-left: 3px; }
+
+  .case-placeholder p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .case-body {
+    padding: 1.25rem 1.5rem 1.5rem;
+  }
+
+  .case-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    background: rgba(245,230,66,0.1);
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    margin-bottom: 0.75rem;
+  }
+
+  .case-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .case-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .case-results {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .case-result-item .val {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: var(--yellow);
+    line-height: 1;
+  }
+
+  .case-result-item .key {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* CLIENTES */
+  #clientes { background: var(--gray); }
+
+  .clients-wall {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.06);
+    margin-top: 2rem;
+  }
+
+  .client-cell {
+    background: var(--gray);
+    padding: 1.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: background 0.2s;
+    min-height: 80px;
+  }
+
+  .client-cell:hover { background: var(--gray-mid); }
+
+  .client-cell span {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    line-height: 1.3;
+    transition: color 0.2s;
+  }
+
+  .client-cell:hover span { color: var(--yellow); }
+
+  /* PLANES */
+  #planes { background: var(--black); }
+
+  .plans-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+
+  .plan-card {
+    background: var(--gray);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 4px;
+    padding: 2rem 1.75rem;
+    position: relative;
+    transition: border-color 0.2s;
+  }
+
+  .plan-card:hover { border-color: rgba(245,230,66,0.3); }
+
+  .plan-card.featured {
+    border-color: var(--yellow);
+    background: #151500;
+  }
+
+  .plan-badge {
+    position: absolute;
+    top: -12px;
+    left: 1.75rem;
+    background: var(--yellow);
+    color: var(--black);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.75rem;
+    border-radius: 2px;
+  }
+
+  .plan-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+    line-height: 1.1;
+  }
+
+  .plan-sub {
+    font-size: 0.8rem;
+    color: var(--yellow);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+
+  .plan-price {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 3rem;
+    line-height: 1;
+    color: var(--yellow);
+    margin-bottom: 0.25rem;
+  }
+
+  .plan-price-note {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .plan-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 2rem;
+  }
+
+  .plan-features li {
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.75);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    line-height: 1.4;
+  }
+
+  .plan-features li::before {
+    content: '✓';
+    color: var(--yellow);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .plan-cta {
+    display: block;
+    text-align: center;
+    padding: 0.75rem;
+    border: 1px solid rgba(245,230,66,0.4);
+    color: var(--yellow);
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .plan-cta:hover, .plan-card.featured .plan-cta {
+    background: var(--yellow);
+    color: var(--black);
+    border-color: var(--yellow);
+  }
+
+  /* CTA FINAL */
+  #contacto {
+    background: var(--yellow);
+    color: var(--black);
+    text-align: center;
+    padding: 5rem 2.5rem;
+  }
+
+  #contacto .section-eyebrow { color: rgba(0,0,0,0.5); }
+
+  #contacto .section-title { color: var(--black); margin-bottom: 0.75rem; }
+
+  #contacto .section-sub { color: rgba(0,0,0,0.6); margin: 0 auto 2.5rem; }
+
+  .cta-btn {
+    display: inline-block;
+    background: var(--black);
+    color: var(--yellow);
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 1rem 2.5rem;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: transform 0.15s, background 0.15s;
+  }
+
+  .cta-btn:hover { background: #1a1a1a; transform: translateY(-2px); }
+
+  /* FOOTER */
+  footer {
+    background: #050505;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 2rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  footer .logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 1.2rem;
+    color: var(--white);
+  }
+
+  footer .logo span { color: var(--yellow); }
+
+  footer p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  /* VIDEO POPUP */
+  .video-modal-bg {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.92);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .video-modal-bg.open { display: flex; }
+
+  .video-modal {
+    width: 90%;
+    max-width: 900px;
+    position: relative;
+  }
+
+  .video-modal-close {
+    position: absolute;
+    top: -2.5rem;
+    right: 0;
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 1.5rem;
+    cursor: pointer;
+    font-weight: 300;
+  }
+
+  .video-modal-inner {
+    position: relative;
+    padding-bottom: 56.25%;
+    background: #000;
+  }
+
+  .video-modal-inner iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  @media (max-width: 640px) {
+    nav { padding: 1rem 1.25rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.25rem; }
+    .hero { padding: 7rem 1.25rem 3rem; }
+    .portfolio-header { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">A<span>U</span>DAX</a>
+  <ul class="nav-links">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#portafolio">Portafolio</a></li>
+    <li><a href="#clientes">Clientes</a></li>
+    <li><a href="#planes">Planes</a></li>
+    <li><a href="#contacto" class="nav-cta">Trabajemos</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-text">AUDAX</div>
+  <p class="hero-eyebrow">Estrategia Digital · Riobamba, Ecuador</p>
+  <h1>Tu negocio <em>merece</em> ser visto.</h1>
+  <p class="hero-sub">Creamos contenido audiovisual, gestionamos tus redes y activamos campañas digitales que convierten seguidores en clientes reales.</p>
+  <div class="hero-actions">
+    <a href="#portafolio" class="btn-primary">Ver nuestro trabajo</a>
+    <a href="#planes" class="btn-ghost">Ver planes y precios</a>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="num">+25</div>
+      <div class="label">Clientes activos</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num">3</div>
+      <div class="label">Plataformas manejadas</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num">ROI</div>
+      <div class="label">Enfoque en resultados</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios">
+  <p class="section-eyebrow">Lo que hacemos</p>
+  <h2 class="section-title">Servicios</h2>
+  <p class="section-sub">Todo lo que tu marca necesita para crecer en el mundo digital, desde la idea hasta la conversión.</p>
+  <div class="services-grid">
+    <div class="service-card">
+      <p class="service-num">01</p>
+      <h3 class="service-title">Creación de Contenido</h3>
+      <p class="service-desc">Reels, carruseles y posts pensados para enganchar. Producción audiovisual completa adaptada a tu industria.</p>
+    </div>
+    <div class="service-card">
+      <p class="service-num">02</p>
+      <h3 class="service-title">Gestión de Redes</h3>
+      <p class="service-desc">Manejo profesional de Facebook, Instagram y TikTok. Calendario editorial, interacción con tu audiencia y reportes de rendimiento.</p>
+    </div>
+    <div class="service-card">
+      <p class="service-num">03</p>
+      <h3 class="service-title">Publicidad Digital</h3>
+      <p class="service-desc">Campañas de Meta Ads orientadas a alcance, visualizaciones y captación de leads. Segmentación estratégica y optimización continua.</p>
+    </div>
+    <div class="service-card">
+      <p class="service-num">04</p>
+      <h3 class="service-title">Estrategia de Marca</h3>
+      <p class="service-desc">Construimos la narrativa de tu negocio. Identidad visual, posicionamiento y personalidad de marca coherentes con tus objetivos.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PORTAFOLIO -->
+<section id="portafolio">
+  <div class="portfolio-header">
+    <div>
+      <p class="section-eyebrow">Nuestros casos</p>
+      <h2 class="section-title">Portafolio</h2>
+    </div>
+    <p style="font-size:0.85rem; color:var(--text-muted); max-width:280px; text-align:right;">Reemplaza las URLs de YouTube con los videos reales de tus clientes</p>
+  </div>
+
+  <div class="cases-grid">
+
+    <!-- CASO 1 -->
+    <div class="case-card">
+      <div class="case-video">
+        <div class="case-placeholder" onclick="openVideo('https://www.youtube.com/embed/dQw4w9WgXcQ')">
+          <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <p>Reproducir video</p>
+        </div>
+      </div>
+      <div class="case-body">
+        <span class="case-tag">Restaurante</span>
+        <h3 class="case-name">Cocina Manaba</h3>
+        <p class="case-desc">Estrategia de contenido y pauta para posicionar la marca en Riobamba con contenido visual de alto impacto.</p>
+        <div class="case-results">
+          <div class="case-result-item"><div class="val">3x</div><div class="key">Alcance</div></div>
+          <div class="case-result-item"><div class="val">+40%</div><div class="key">Engagement</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CASO 2 -->
+    <div class="case-card">
+      <div class="case-video">
+        <div class="case-placeholder" onclick="openVideo('https://www.youtube.com/embed/dQw4w9WgXcQ')">
+          <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <p>Reproducir video</p>
+        </div>
+      </div>
+      <div class="case-body">
+        <span class="case-tag">Salud</span>
+        <h3 class="case-name">Hospital San Juan</h3>
+        <p class="case-desc">Gestión integral de redes y campaña de reconocimiento de marca para el sector salud en la región.</p>
+        <div class="case-results">
+          <div class="case-result-item"><div class="val">2.5x</div><div class="key">Seguidores</div></div>
+          <div class="case-result-item"><div class="val">-30%</div><div class="key">CPC</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CASO 3 -->
+    <div class="case-card">
+      <div class="case-video">
+        <div class="case-placeholder" onclick="openVideo('https://www.youtube.com/embed/dQw4w9WgXcQ')">
+          <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <p>Reproducir video</p>
+        </div>
+      </div>
+      <div class="case-body">
+        <span class="case-tag">Automotriz</span>
+        <h3 class="case-name">Importadora Car-Max</h3>
+        <p class="case-desc">Contenido audiovisual de producto y campañas de leads para captación de compradores potenciales.</p>
+        <div class="case-results">
+          <div class="case-result-item"><div class="val">120</div><div class="key">Leads/mes</div></div>
+          <div class="case-result-item"><div class="val">4.2x</div><div class="key">ROAS</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CASO 4 -->
+    <div class="case-card">
+      <div class="case-video">
+        <div class="case-placeholder" onclick="openVideo('https://www.youtube.com/embed/dQw4w9WgXcQ')">
+          <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <p>Reproducir video</p>
+        </div>
+      </div>
+      <div class="case-body">
+        <span class="case-tag">Moda / Imagen</span>
+        <h3 class="case-name">Esther Moncada</h3>
+        <p class="case-desc">Posicionamiento de marca personal como asesora de imagen con contenido educativo y reels de alto alcance.</p>
+        <div class="case-results">
+          <div class="case-result-item"><div class="val">5x</div><div class="key">Alcance</div></div>
+          <div class="case-result-item"><div class="val">+80%</div><div class="key">Consultas</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CASO 5 -->
+    <div class="case-card">
+      <div class="case-video">
+        <div class="case-placeholder" onclick="openVideo('https://www.youtube.com/embed/dQw4w9WgXcQ')">
+          <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <p>Reproducir video</p>
+        </div>
+      </div>
+      <div class="case-body">
+        <span class="case-tag">Legal</span>
+        <h3 class="case-name">Abg. Ximena Rodríguez</h3>
+        <p class="case-desc">Estrategia de contenido para construir autoridad profesional y captación de clientes en derecho laboral y civil.</p>
+        <div class="case-results">
+          <div class="case-result-item"><div class="val">2x</div><div class="key">Consultas</div></div>
+          <div class="case-result-item"><div class="val">+55%</div><div class="key">Alcance</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CASO 6 -->
+    <div class="case-card">
+      <div class="case-video">
+        <div class="case-placeholder" onclick="openVideo('https://www.youtube.com/embed/dQw4w9WgXcQ')">
+          <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <p>Reproducir video</p>
+        </div>
+      </div>
+      <div class="case-body">
+        <span class="case-tag">Electrodomésticos</span>
+        <h3 class="case-name">Electrobahia</h3>
+        <p class="case-desc">Campaña de ventas estacional con contenido de producto y pauta digital orientada a conversión directa.</p>
+        <div class="case-results">
+          <div class="case-result-item"><div class="val">3.8x</div><div class="key">ROAS</div></div>
+          <div class="case-result-item"><div class="val">-25%</div><div class="key">CPA</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CLIENTES -->
+<section id="clientes">
+  <p class="section-eyebrow">Confían en nosotros</p>
+  <h2 class="section-title">Nuestros clientes</h2>
+  <p class="section-sub">Más de 25 empresas y emprendimientos de Chimborazo y Ecuador nos han confiado su presencia digital.</p>
+  <div class="clients-wall">
+    <div class="client-cell"><span>Cámara CAPICH</span></div>
+    <div class="client-cell"><span>Encuentro Nacional de Mujeres</span></div>
+    <div class="client-cell"><span>Casa del Riego</span></div>
+    <div class="client-cell"><span>Cocina Manaba</span></div>
+    <div class="client-cell"><span>La Prensa Chimborazo</span></div>
+    <div class="client-cell"><span>Agualuz</span></div>
+    <div class="client-cell"><span>Rio Lens</span></div>
+    <div class="client-cell"><span>Fundación Carlos Freire</span></div>
+    <div class="client-cell"><span>Abra Kadabra</span></div>
+    <div class="client-cell"><span>Electrobahia</span></div>
+    <div class="client-cell"><span>La Choza de Alex</span></div>
+    <div class="client-cell"><span>Abg. Ximena Rodríguez</span></div>
+    <div class="client-cell"><span>Berrones Bienes Raíces</span></div>
+    <div class="client-cell"><span>Chiang</span></div>
+    <div class="client-cell"><span>Dra. Angus Cerda</span></div>
+    <div class="client-cell"><span>Carrera Agronomía ESPOCH</span></div>
+    <div class="client-cell"><span>Amax</span></div>
+    <div class="client-cell"><span>Importadora Car-Max</span></div>
+    <div class="client-cell"><span>San Ignacio</span></div>
+    <div class="client-cell"><span>Hospital San Juan</span></div>
+    <div class="client-cell"><span>Ferretería Galápagos</span></div>
+    <div class="client-cell"><span>Esther Moncada</span></div>
+  </div>
+</section>
+
+<!-- PLANES -->
+<section id="planes">
+  <p class="section-eyebrow">Inversión</p>
+  <h2 class="section-title">Planes y precios</h2>
+  <p class="section-sub">Elige el nivel de activación que necesita tu negocio. Todos los planes incluyen manejo de FB, IG y TikTok.</p>
+  <div class="plans-grid">
+
+    <div class="plan-card">
+      <p class="plan-name">Base</p>
+      <p class="plan-sub">Presencia Digital</p>
+      <p class="plan-price">$225</p>
+      <p class="plan-price-note">+ $25 inversión en pauta</p>
+      <ul class="plan-features">
+        <li>8 piezas de contenido: 4 reels + 4 carruseles</li>
+        <li>Seguimiento en historias</li>
+        <li>Optimización del perfil</li>
+        <li>Reporte de alcance y engagement</li>
+        <li>Manejo de FB, IG y TikTok</li>
+      </ul>
+      <a href="#contacto" class="plan-cta">Empezar</a>
+    </div>
+
+    <div class="plan-card featured">
+      <span class="plan-badge">Más elegido</span>
+      <p class="plan-name">Intermedio</p>
+      <p class="plan-sub">Crecimiento</p>
+      <p class="plan-price">$350</p>
+      <p class="plan-price-note">+ $40 inversión en pauta</p>
+      <ul class="plan-features">
+        <li>12 piezas: 10 reels + 2 carruseles</li>
+        <li>Estrategia mensual de pauta y segmentación</li>
+        <li>Campañas de captación de leads</li>
+        <li>Manejo de FB, IG y TikTok</li>
+      </ul>
+      <a href="#contacto" class="plan-cta">Empezar</a>
+    </div>
+
+    <div class="plan-card">
+      <p class="plan-name">Premium</p>
+      <p class="plan-sub">Escalamiento</p>
+      <p class="plan-price">$500</p>
+      <p class="plan-price-note">+ $200 inversión en pauta</p>
+      <ul class="plan-features">
+        <li>12 piezas: 10 reels + 2 carruseles</li>
+        <li>Estrategia mensual de pauta y segmentación</li>
+        <li>Campañas de captación de leads</li>
+        <li>Manejo de FB, IG y TikTok</li>
+        <li>Pauta agresiva con mayor alcance</li>
+      </ul>
+      <a href="#contacto" class="plan-cta">Empezar</a>
+    </div>
+
+    <div class="plan-card">
+      <p class="plan-name">Emprendedor</p>
+      <p class="plan-sub">Entrada</p>
+      <p class="plan-price">$170</p>
+      <p class="plan-price-note">+ $75 inversión en pauta</p>
+      <ul class="plan-features">
+        <li>4 piezas de contenido a convenir</li>
+        <li>Seguimiento en historias</li>
+        <li>Optimización del perfil</li>
+        <li>Manejo de FB, IG y TikTok</li>
+      </ul>
+      <a href="#contacto" class="plan-cta">Empezar</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA CONTACTO -->
+<section id="contacto">
+  <p class="section-eyebrow">Hablemos</p>
+  <h2 class="section-title">¿Listo para crecer?</h2>
+  <p class="section-sub">Estamos disponibles para cualquier consulta. Escríbenos y te armamos una propuesta personalizada para tu negocio.</p>
+  <a href="https://wa.me/593000000000?text=Hola%20Audax,%20quiero%20info%20sobre%20sus%20servicios" target="_blank" class="cta-btn">Escribir por WhatsApp</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">A<span>U</span>DAX <small style="font-size:0.65rem; font-weight:400; color:var(--text-muted); letter-spacing:0.1em;">ESTRATEGIA DIGITAL</small></div>
+  <p>© 2026 Audax Estrategia Digital · Riobamba, Ecuador</p>
+</footer>
+
+<!-- VIDEO MODAL -->
+<div class="video-modal-bg" id="videoModal" onclick="closeVideo(event)">
+  <div class="video-modal">
+    <button class="video-modal-close" onclick="closeVideoBtn()">✕ Cerrar</button>
+    <div class="video-modal-inner">
+      <iframe id="videoFrame" src="" allowfullscreen allow="autoplay"></iframe>
+    </div>
+  </div>
+</div>
+
+<script>
+function openVideo(url) {
+  document.getElementById('videoFrame').src = url + '?autoplay=1';
+  document.getElementById('videoModal').classList.add('open');
+}
+
+function closeVideoBtn() {
+  document.getElementById('videoFrame').src = '';
+  document.getElementById('videoModal').classList.remove('open');
+}
+
+function closeVideo(e) {
+  if (e.target === document.getElementById('videoModal')) {
+    closeVideoBtn();
+  }
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeVideoBtn();
+});
+</script>
+</body>
+</html>
